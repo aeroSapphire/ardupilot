@@ -188,6 +188,10 @@ public:
         return false;
     }
 
+    virtual bool get_accel_command(Vector3f& vec_accel_command) const WARN_IF_UNUSED {
+        return false;
+    }
+
     // Get a derivative of the vertical position in m/s which is kinematically consistent with the vertical position is required by some control loops.
     // This is different to the vertical velocity from the EKF which is not always consistent with the vertical position due to the various errors that are being corrected for.
     virtual bool get_vert_pos_rate_D(float &velocity) const = 0;

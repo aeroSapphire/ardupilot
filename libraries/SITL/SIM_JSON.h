@@ -98,6 +98,7 @@ private:
         Vector3f attitude;
         Quaternion quaternion;
         Vector3f velocity;
+        Vector3f accel_command;
         float rng[6];
         struct {
             float direction;
@@ -119,7 +120,7 @@ private:
         { "imu", "gyro",    &state.imu.gyro, DATA_VECTOR3F, true },
         { "imu", "accel_body", &state.imu.accel_body, DATA_VECTOR3F, true },
         { "", "position", &state.position, DATA_VECTOR3D, true },
-        { "", "attitude", &state.attitude, DATA_VECTOR3F, false },
+        { "", "attitude", &state.attitude, DATA_VECTOR3F, true },
         { "", "quaternion", &state.quaternion, QUATERNION, false },
         { "", "velocity", &state.velocity, DATA_VECTOR3F, true },
         { "", "rng_1", &state.rng[0], DATA_FLOAT, false },
@@ -132,6 +133,7 @@ private:
         {"windvane","speed", &state.wind_vane_apparent.speed, DATA_FLOAT, false},
         {"", "airspeed", &state.airspeed, DATA_FLOAT, false},
         {"", "no_time_sync", &state.no_time_sync, BOOLEAN, false},
+        {"", "accel_command", &state.accel_command, DATA_VECTOR3F, true},
     };
 
     // Enum coresponding to the ordering of keys in the keytable.
@@ -153,6 +155,7 @@ private:
         WIND_SPD    = 1U << 14,
         AIRSPEED    = 1U << 15,
         TIME_SYNC   = 1U << 16,
+        ACCEL_COMMAND  = 1U << 17,
     };
     uint32_t last_received_bitmask;
 };

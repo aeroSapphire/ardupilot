@@ -118,6 +118,10 @@ public:
         return mag_bf;
     }
 
+    const Vector3f &get_accel_command(void) const {
+        return accel_command;
+    }
+
     float gross_mass() const { return mass + external_payload_mass; }
 
     virtual void set_config(const char* config) {
@@ -183,6 +187,7 @@ protected:
     Vector3f velocity_air_ef;            // velocity relative to airmass, earth frame
     Vector3f velocity_air_bf;            // velocity relative to airmass, body frame
     Vector3d position;                   // meters, NED from origin
+    Vector3f accel_command;
     float mass;                          // kg
     float external_payload_mass;         // kg
     Vector3f accel_body{0.0f, 0.0f, -GRAVITY_MSS}; // m/s/s NED, body frame
@@ -335,6 +340,7 @@ private:
         Vector3f velocity_ef;
         uint64_t last_update_us;
         Location location;
+        Vector3f accel_command;
     } smoothing;
 
     LowPassFilterFloat servo_filter[5];

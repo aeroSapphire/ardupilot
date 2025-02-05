@@ -379,6 +379,9 @@ void Aircraft::fill_fdm(struct sitl_fdm &fdm)
     fdm.xAccel    = accel_body.x;
     fdm.yAccel    = accel_body.y;
     fdm.zAccel    = accel_body.z;
+    fdm.accelX = accel_command.x;
+    fdm.accelY = accel_command.y;
+    fdm.accelZ = accel_command.z;
     fdm.rollRate  = degrees(gyro.x);
     fdm.pitchRate = degrees(gyro.y);
     fdm.yawRate   = degrees(gyro.z);

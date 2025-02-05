@@ -259,6 +259,8 @@ public:
     // order. Must only be called if have_inertial_nav() is true
     bool get_velocity_NED(Vector3f &vec) const WARN_IF_UNUSED;
 
+    bool get_accel_command(Vector3f &vec) const WARN_IF_UNUSED;
+
     // return the relative position NED from either home or origin
     // return true if the estimate is valid
     bool get_relative_position_NED_home(Vector3f &vec) const WARN_IF_UNUSED;
@@ -919,6 +921,8 @@ private:
     // return the index of the primary core or -1 if no primary core selected
     int8_t _get_primary_core_index() const;
 
+    bool _get_accel_command(Vector3f &vec) const WARN_IF_UNUSED;
+    
     // get the index of the current primary accelerometer sensor
     uint8_t _get_primary_accel_index(void) const;
 

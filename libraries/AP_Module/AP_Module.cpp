@@ -215,6 +215,13 @@ void AP_Module::call_hook_AHRS_update(const AP_AHRS &ahrs)
         state.velocity_ned[1] = vel.y;
         state.velocity_ned[2] = vel.z;
     }
+
+    Vector3f acc;
+    if (ahrs.get_accel_command(acc)) {
+        state.accel_command[0] = acc.x;
+        state.accel_command[1] = acc.y;
+        state.accel_command[2] = acc.z;
+    }
     
     for (const struct hook_list *h=hooks[HOOK_AHRS_UPDATE]; h; h=h->next) {
         ap_hook_AHRS_update_fn_t fn = reinterpret_cast<ap_hook_AHRS_update_fn_t>(h->symbol);

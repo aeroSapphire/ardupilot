@@ -125,6 +125,10 @@ public:
         return ahrs.get_relative_position_NE_home(vecNE);
     }
 
+    bool get_accel_command(Vector3f &vec) const WARN_IF_UNUSED {
+        return ahrs.get_accel_command(vec);
+    }
+
     bool get_relative_position_NE_origin(Vector2f &vecNE) const WARN_IF_UNUSED {
         return ahrs.get_relative_position_NE_origin(vecNE);
     }

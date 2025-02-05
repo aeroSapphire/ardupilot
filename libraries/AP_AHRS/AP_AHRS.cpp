@@ -358,6 +358,7 @@ void AP_AHRS::update_state(void)
     _getCorrectedDeltaVelocityNED(state.corrected_dv, state.corrected_dv_dt);
     state.origin_ok = _get_origin(state.origin);
     state.velocity_NED_ok = _get_velocity_NED(state.velocity_NED);
+    state.accel_command_ok = _get_accel_command(state.accel_command);
 }
 
 void AP_AHRS::update(bool skip_ins_update)
@@ -1529,6 +1530,39 @@ bool AP_AHRS::get_mag_field_NED(Vector3f &vec) const
         return false;
 #endif
     }
+    return false;
+}
+
+
+bool AP_AHRS::_get_accel_command(Vector3f &vec) const
+{
+    switch (active_EKF_type()) {
+#if AP_AHRS_DCM_ENABLED
+    case EKFType::DCM:
+        break;
+#endif
+#if HAL_NAVEKF2_AVAILABLE
+    case EKFType::TWO:
+        return false;
+#endif
+
+#if HAL_NAVEKF3_AVAILABLE
+    case EKFType::THREE:
+        return false;
+#endif
+
+#if AP_AHRS_SIM_ENABLED
+    case EKFType::SIM:
+        return sim.get_accel_command(vec);
+#endif
+#if AP_AHRS_EXTERNAL_ENABLED
+    case EKFType::EXTERNAL:
+        return false;
+#endif
+    }
+#if AP_AHRS_DCM_ENABLED
+    return dcm.get_velocity_NED(vec);
+#endif
     return false;
 }
 
@@ -3548,6 +3582,12 @@ bool AP_AHRS::get_location_from_home_offset(Location &loc, const Vector3p &offse
     loc.offset(offset_ned);
 
     return true;
+}
+
+bool AP_AHRS::get_accel_command(Vector3f &vec) const
+{
+    vec = state.accel_command;
+    return state.accel_command_ok;
 }
 
 // singleton instance

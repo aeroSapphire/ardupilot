@@ -467,11 +467,11 @@ public:
 private:
 
     pitch_damper pitchDamper;
-    pitch_hold pitchHold;
+    // pitch_hold pitchHold;
     yaw_damper yawDamper;
-    yaw_hold yawHold;
+    // yaw_hold yawHold;
     roll_damper rollDamper;
-    roll_hold rollHold;
+    // roll_hold rollHold;
 
     // pitch_damper_tunable pitchDamperTunable;
     // yaw_damper_tunable yawDamperTunable;

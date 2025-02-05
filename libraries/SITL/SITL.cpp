@@ -1234,6 +1234,9 @@ void SIM::sim_state_send(mavlink_channel_t chan) const
             state.speedN,
             state.speedE,
             state.speedD,
+            state.accelX,
+            state.accelY,
+            state.accelZ,
 	        (int32_t)(state.latitude*1.0e7),
             (int32_t)(state.longitude*1.0e7));
 }

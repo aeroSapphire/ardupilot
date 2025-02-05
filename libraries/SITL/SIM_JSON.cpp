@@ -308,7 +308,10 @@ void JSON::recv_fdm(const struct sitl_input &input)
     position = state.position;
     position.xy() += origin.get_distance_NE_double(home);
     use_time_sync = !state.no_time_sync;
+    accel_command = state.accel_command;
 
+    printf("Axyz: [%f, %f, %f]\n", accel_command.x, accel_command.y, accel_command.z);
+    
     // deal with euler or quaternion attitude
     if ((received_bitmask & QUAT_ATT) != 0) {
         // if we have a quaternion attitude use it rather than euler

@@ -41,6 +41,18 @@ bool AP_AHRS_SIM::wind_estimate(Vector3f &wind) const
     return true;
 }
 
+bool AP_AHRS_SIM::get_accel_command(Vector3f &vec) const
+{
+    if (_sitl == nullptr) {
+        return false;
+    }
+
+    const struct SITL::sitl_fdm &fdm = _sitl->state;
+    vec = Vector3f(fdm.accelX, fdm.accelY, fdm.accelZ);
+
+    return true;
+}
+
 bool AP_AHRS_SIM::airspeed_estimate(float &airspeed_ret) const
 {
     if (_sitl == nullptr) {
