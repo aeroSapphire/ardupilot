@@ -9,6 +9,13 @@
 #include "quadplane.h"
 #include <AP_AHRS/AP_AHRS.h>
 #include <AP_Mission/AP_Mission.h>
+#include <AP_PitchDamper/pitch_damper.h>
+#include <AP_YawDamper/yaw_damper.h>
+#include <AP_RollDamper/roll_damper.h>
+#include <AP_NormalAccelerationController/normal_acceleration_controller.h>
+#include <AP_LateralAccelerationController/lateral_acceleration_controller.h>
+#include <AP_GuidanceLaw/guidance_law.h>
+
 
 class AC_PosControl;
 class AC_AttitudeControl_Multi;
@@ -45,6 +52,7 @@ public:
         QLOITER       = 19,
         QLAND         = 20,
         QRTL          = 21,
+        INTERCEPT     = 26,
 #if QAUTOTUNE_ENABLED
         QAUTOTUNE     = 22,
 #endif
@@ -441,6 +449,39 @@ public:
 private:
     void stabilize_stick_mixing_direct();
 
+};
+
+class ModeIntercept : public Mode
+{
+public:
+
+    Number mode_number() const override { return Number::INTERCEPT; }
+    const char *name() const override { return "INTERCEPT"; }
+    const char *name4() const override { return "INTER"; }
+
+    // methods that affect movement of the vehicle in this mode
+    void update() override;
+
+    void run() override;
+
+private:
+
+    pitch_damper pitchDamper;
+    pitch_hold pitchHold;
+    yaw_damper yawDamper;
+    yaw_hold yawHold;
+    roll_damper rollDamper;
+    roll_hold rollHold;
+
+    // pitch_damper_tunable pitchDamperTunable;
+    // yaw_damper_tunable yawDamperTunable;
+    // roll_damper_tunable rollDamperTunable;
+
+    guidance_law guidance;
+    normal_acceleration_controller normalAccController;
+    lateral_acceleration_controller lateralAccController;
+
+    bool Initialized = false;
 };
 
 class ModeTraining : public Mode
