@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'yaw_damper'.
 //
-// Model version                  : 1.1
+// Model version                  : 1.6
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Tue Feb  4 04:53:29 2025
+// C/C++ source code generated on : Wed Feb  5 21:48:25 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -62,8 +62,20 @@ class yaw_damper final
                                    // Computed Parameter: uDLookupTable_bp01Data
                                       //  Referenced by: '<Root>/1-D Lookup Table'
 
+    real32_T Gain2_Gain;               // Computed Parameter: Gain2_Gain
+                                          //  Referenced by: '<Root>/Gain2'
+
     real32_T Gain_Gain;                // Computed Parameter: Gain_Gain
+                                          //  Referenced by: '<Root>/Gain'
+
+    real32_T Gain_Gain_b;              // Computed Parameter: Gain_Gain_b
                                           //  Referenced by: '<S1>/Gain'
+
+    real32_T Saturation_UpperSat;     // Computed Parameter: Saturation_UpperSat
+                                         //  Referenced by: '<Root>/Saturation'
+
+    real32_T Saturation_LowerSat;     // Computed Parameter: Saturation_LowerSat
+                                         //  Referenced by: '<Root>/Saturation'
 
     real32_T uDLookupTable1_tableData[11];
                                  // Computed Parameter: uDLookupTable1_tableData
@@ -95,9 +107,6 @@ class yaw_damper final
   // Real-Time Model get method
   yaw_damper::RT_MODEL_yaw_damper_T * getRTM();
 
-  // Block states
-  DW_yaw_damper_T yaw_damper_DW;
-
   // Tunable parameters
   static P_yaw_damper_T yaw_damper_P;
 
@@ -119,6 +128,9 @@ class yaw_damper final
 
   // private data and function members
  private:
+  // Block states
+  DW_yaw_damper_T yaw_damper_DW;
+
   // Real-Time Model
   RT_MODEL_yaw_damper_T yaw_damper_M;
 };

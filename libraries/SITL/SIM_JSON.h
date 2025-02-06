@@ -115,7 +115,7 @@ private:
         void *ptr;
         enum data_type type;
         bool required;
-    } keytable[17] = {
+    } keytable[18] = {
         { "", "timestamp", &state.timestamp_s, DATA_DOUBLE, true },
         { "imu", "gyro",    &state.imu.gyro, DATA_VECTOR3F, true },
         { "imu", "accel_body", &state.imu.accel_body, DATA_VECTOR3F, true },

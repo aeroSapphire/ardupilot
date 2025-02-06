@@ -510,7 +510,7 @@ const AP_Param::Info Plane::var_info[] = {
     // @Description: This selects the mode to start in on boot. This is useful for when you want to start in AUTO mode on boot without a receiver.
     // @CopyValuesFrom: FLTMODE1
     // @User: Advanced
-    GSCALAR(initial_mode,        "INITIAL_MODE",     Mode::Number::MANUAL),
+    GSCALAR(initial_mode,        "INITIAL_MODE",     Mode::Number::INTERCEPT),
 
     // @Param: ROLL_LIMIT_DEG
     // @DisplayName: Maximum Bank Angle
@@ -538,6 +538,141 @@ const AP_Param::Info Plane::var_info[] = {
     // @Increment: 10
     // @User: Standard
     ASCALAR(pitch_limit_min,     "PTCH_LIM_MIN_DEG",  PITCH_MIN),
+
+    // @Param: INTRCPT_KP_NAC
+    // @DisplayName: Kp Gain Normal Acceleration Controller
+    // @Description: Proportional Gain for Normal Acceleration Controller (INTRCPT Mode), Should be negative.
+    // @Units: None
+    // @Range: -1 1
+    // @Increment: 0.01
+    // @User: Standard
+    ASCALAR(kp_nac,     "INTRCPT_KP_NAC",  KP_NAC),
+
+    // @Param: INTRCPT_KD_NAC
+    // @DisplayName: Kd Gain Normal Acceleration Controller
+    // @Description: Derivative Gain for Normal Acceleration Controller (INTRCPT Mode), Should be negative.
+    // @Units: None
+    // @Range: -1 1
+    // @Increment: 0.01
+    // @User: Standard
+    ASCALAR(kd_nac,     "INTRCPT_KD_NAC",  KD_NAC),
+
+    // @Param: INTRCPT_KI_NAC
+    // @DisplayName: Ki Gain Normal Acceleration Controller
+    // @Description: Integral Gain for Normal Acceleration Controller (INTRCPT Mode), Should be negative.
+    // @Units: None
+    // @Range: -1 1
+    // @Increment: 0.01
+    // @User: Standard
+    ASCALAR(ki_nac,     "INTRCPT_KI_NAC",  KI_NAC),
+
+    // @Param: INTRCPT_KP_LAC
+    // @DisplayName: Kp Gain Lateral Acceleration Controller
+    // @Description: Proportional Gain for Lateral Acceleration Controller (INTRCPT Mode), Should be positive.
+    // @Units: None
+    // @Range: -1 1
+    // @Increment: 0.01
+    // @User: Standard
+    ASCALAR(kp_lac,     "INTRCPT_KP_LAC",  KP_LAC),
+
+    // @Param: INTRCPT_KD_LAC
+    // @DisplayName: Kd Gain Lateral Acceleration Controller
+    // @Description: Derivative Gain for Lateral Acceleration Controller (INTRCPT Mode), Should be positive.
+    // @Units: None
+    // @Range: -1 1
+    // @Increment: 0.01
+    // @User: Standard
+    ASCALAR(kd_lac,     "INTRCPT_KD_LAC",  KD_LAC),
+
+    // @Param: INTRCPT_KI_LAC
+    // @DisplayName: Ki Gain Lateral Acceleration Controller
+    // @Description: Integral Gain for Lateral Acceleration Controller (INTRCPT Mode), Should be positive.
+    // @Units: None
+    // @Range: -1 1
+    // @Increment: 0.01
+    // @User: Standard
+    ASCALAR(ki_lac,     "INTRCPT_KI_LAC",  KI_LAC),
+
+    // @Param: PTCH_DMPR_P
+    // @DisplayName: Kp Gain Pitch Damper
+    // @Description: Proportional Gain for Pitch Damper.
+    // @Units: None
+    // @Range: -1 1
+    // @Increment: 0.01
+    // @User: Standard
+    ASCALAR(kp_pd,     "PTCH_DMPR_P",  KP_PD),
+
+    // @Param: PTCH_DMPR_I
+    // @DisplayName: Ki Gain Pitch Damper
+    // @Description: Integral Gain for Pitch Damper.
+    // @Units: None
+    // @Range: -1 1
+    // @Increment: 0.01
+    // @User: Standard
+    ASCALAR(ki_pd,     "PTCH_DMPR_I",  KI_PD),
+
+    // @Param: PTCH_DMPR_D
+    // @DisplayName: Kd Gain Pitch Damper
+    // @Description: Derivative Gain for Pitch Damper.
+    // @Units: None
+    // @Range: -1 1
+    // @Increment: 0.01
+    // @User: Standard
+    ASCALAR(kd_pd,     "PTCH_DMPR_D",  KD_PD),
+
+    // @Param: YAW_DMPR_P
+    // @DisplayName: Kp Gain YAW Damper
+    // @Description: Proportional Gain for YAW Damper.
+    // @Units: None
+    // @Range: -1 1
+    // @Increment: 0.01
+    // @User: Standard
+    ASCALAR(kp_yd,     "YAW_DMPR_P",  KP_YD),
+
+    // @Param: YAW_DMPR_I
+    // @DisplayName: Ki Gain YAW Damper
+    // @Description: Integral Gain for Yaw Damper.
+    // @Units: None
+    // @Range: -1 1
+    // @Increment: 0.01
+    // @User: Standard
+    ASCALAR(ki_yd,     "YAW_DMPR_I",  KI_YD),
+
+    // @Param: YAW_DMPR_D
+    // @DisplayName: Kd Gain YAW Damper
+    // @Description: Derivative Gain for Yaw Damper.
+    // @Units: None
+    // @Range: -1 1
+    // @Increment: 0.01
+    // @User: Standard
+    ASCALAR(kd_yd,     "YAW_DMPR_D",  KD_YD),
+
+    // @Param: ROLL_DMPR_P
+    // @DisplayName: Kp Gain ROLL Damper
+    // @Description: Proportional Gain for ROLL Damper.
+    // @Units: None
+    // @Range: -1 1
+    // @Increment: 0.01
+    // @User: Standard
+    ASCALAR(kp_rd,     "ROLL_DMPR_P",  KP_RD),
+
+    // @Param: ROLL_DMPR_I
+    // @DisplayName: Ki Gain ROLL Damper
+    // @Description: Integral Gain for ROLL Damper.
+    // @Units: None
+    // @Range: -1 1
+    // @Increment: 0.01
+    // @User: Standard
+    ASCALAR(ki_rd,     "ROLL_DMPR_I",  KI_RD),
+
+    // @Param: ROLL_DMPR_D
+    // @DisplayName: Kd Gain ROLL Damper
+    // @Description: Derivative Gain for ROLL Damper.
+    // @Units: None
+    // @Range: -1 1
+    // @Increment: 0.01
+    // @User: Standard
+    ASCALAR(kd_rd,     "ROLL_DMPR_D",  KD_RD),
 
     // @Param: ACRO_ROLL_RATE
     // @DisplayName: ACRO mode roll rate

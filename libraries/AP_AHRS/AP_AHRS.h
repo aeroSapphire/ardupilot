@@ -922,7 +922,7 @@ private:
     int8_t _get_primary_core_index() const;
 
     bool _get_accel_command(Vector3f &vec) const WARN_IF_UNUSED;
-    
+
     // get the index of the current primary accelerometer sensor
     uint8_t _get_primary_accel_index(void) const;
 
@@ -989,6 +989,8 @@ private:
         bool origin_ok;
         Vector3f velocity_NED;
         bool velocity_NED_ok;
+        Vector3f accel_command;
+        bool accel_command_ok;
     } state;
 
     /*

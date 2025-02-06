@@ -68,7 +68,6 @@ void ModeIntercept::run()
     normalAccController.step(arg_Az_cmd, arg_Axyz_Body, arg_pitch_rate_command);
 
     // Lateral acceleration controller logic
-    float arg_Ay_body = acc_latest.y;
     float arg_yaw_rate_body = gyro_latest.z;
     float arg_yaw_rate_command;
 
@@ -86,15 +85,15 @@ void ModeIntercept::run()
     yawDamper.step(arg_yaw_rate_command, gyro_latest.z, speed_magnitude, arg_rudder_deflection);
 
     // Generate PWM signals
-    float elevator_PWM = std::floor((arg_elevator_deflection) * 500 / 10) + 1500;
-    float rudder_PWM = std::floor((arg_rudder_deflection) * 500 / 10) + 1500;
+    float elevator_PWM = std::floor((arg_elevator_deflection) * 500 / 7) + 1500;
+    float rudder_PWM = std::floor((arg_rudder_deflection) * 500 / 7) + 1500;
     
     SRV_Channels::set_output_pwm(SRV_Channel::k_elevator, elevator_PWM);
     SRV_Channels::set_output_pwm(SRV_Channel::k_rudder, rudder_PWM);
 
     char msg[200];
-    snprintf(msg, sizeof(msg), "KP_PTCH: %.2f, KI_PTCH: %.2f, KP_YAW: %.2f, KI_YAW: %.2f,Speed: %.2f, Ay_CMD: %.2f",
-             arg_Kp_pitch_damper, arg_Ki_pitch_damper, arg_Kp_yaw_damper, arg_Ki_yaw_damper, speed_magnitude, arg_Ay_cmd);
+    snprintf(msg, sizeof(msg), "Yaw rate: %.4f, Yaw rate command: %.4f, Ay Body: %.2f, Ay Cmd: %.2f, Rudder: %.2f",
+             gyro_latest.z, arg_yaw_rate_command, acc_latest.y, arg_Ay_cmd, arg_rudder_deflection);
 
     gcs().send_text(MAV_SEVERITY_INFO, "%s", msg);
 }

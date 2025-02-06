@@ -16,7 +16,7 @@
 #include "rtwtypes.h"
 #include "roll_damper_private.h"
 
-real32_T look1_iflf_binlxpw(real32_T u0, const real32_T bp0[], const real32_T
+real32_T look1_iflf_binlxpw_rd(real32_T u0, const real32_T bp0[], const real32_T
   table[], uint32_T maxIndex)
 {
   real32_T frac;
@@ -90,7 +90,7 @@ void roll_damper::step(real32_T arg_roll_rate_command, real32_T
   //   Sum: '<Root>/Sum'
 
   arg_aileron_deflection = (roll_damper_DW.DiscreteTimeIntegrator_DSTATE -
-    arg_roll_rate_body * look1_iflf_binlxpw(arg_speed_magnitude,
+    arg_roll_rate_body * look1_iflf_binlxpw_rd(arg_speed_magnitude,
     roll_damper_P.uDLookupTable_bp01Data, roll_damper_P.uDLookupTable_tableData,
     10U)) * roll_damper_P.Gain_Gain * roll_damper_P.Gain_Gain_i;
 
@@ -103,7 +103,7 @@ void roll_damper::step(real32_T arg_roll_rate_command, real32_T
   //   Sum: '<Root>/Sum1'
 
   roll_damper_DW.DiscreteTimeIntegrator_DSTATE += (arg_roll_rate_command -
-    arg_roll_rate_body) * look1_iflf_binlxpw(arg_speed_magnitude,
+    arg_roll_rate_body) * look1_iflf_binlxpw_rd(arg_speed_magnitude,
     roll_damper_P.uDLookupTable1_bp01Data,
     roll_damper_P.uDLookupTable1_tableData, 10U) *
     roll_damper_P.DiscreteTimeIntegrator_gainval;

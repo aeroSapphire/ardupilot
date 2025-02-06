@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'yaw_damper'.
 //
-// Model version                  : 1.1
+// Model version                  : 1.6
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Tue Feb  4 04:53:29 2025
+// C/C++ source code generated on : Wed Feb  5 21:48:25 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -29,18 +29,17 @@ yaw_damper::P_yaw_damper_T yaw_damper::yaw_damper_P{
   // Computed Parameter: DiscreteTimeIntegrator_UpperSat
   //  Referenced by: '<Root>/Discrete-Time Integrator'
 
-  0.122173049F,
+  0.0329F,
 
   // Computed Parameter: DiscreteTimeIntegrator_LowerSat
   //  Referenced by: '<Root>/Discrete-Time Integrator'
 
-  -0.122173049F,
+  -0.0329F,
 
   // Computed Parameter: uDLookupTable_tableData
   //  Referenced by: '<Root>/1-D Lookup Table'
 
-  { -7.5F, -7.0F, -6.0F, -3.5F, -3.0F, -2.0F, -1.0F, -0.2F, -0.1875F, -0.2F,
-    -0.2F },
+  { 15.0F, 14.0F, 12.0F, 7.0F, 6.0F, 4.0F, 2.0F, 0.4F, 0.375F, 0.4F, 0.4F },
 
   // Computed Parameter: uDLookupTable_bp01Data
   //  Referenced by: '<Root>/1-D Lookup Table'
@@ -48,15 +47,35 @@ yaw_damper::P_yaw_damper_T yaw_damper::yaw_damper_P{
   { 25.0F, 50.0F, 100.0F, 160.0F, 170.0F, 200.0F, 250.0F, 275.0F, 290.0F, 350.0F,
     450.0F },
 
+  // Computed Parameter: Gain2_Gain
+  //  Referenced by: '<Root>/Gain2'
+
+  0.15F,
+
   // Computed Parameter: Gain_Gain
+  //  Referenced by: '<Root>/Gain'
+
+  1.0F,
+
+  // Computed Parameter: Gain_Gain_b
   //  Referenced by: '<S1>/Gain'
 
   57.2957802F,
 
+  // Computed Parameter: Saturation_UpperSat
+  //  Referenced by: '<Root>/Saturation'
+
+  10.0F,
+
+  // Computed Parameter: Saturation_LowerSat
+  //  Referenced by: '<Root>/Saturation'
+
+  -10.0F,
+
   // Computed Parameter: uDLookupTable1_tableData
   //  Referenced by: '<Root>/1-D Lookup Table1'
 
-  { 0.2F, 2.0F, 25.0F, 50.0F, 50.0F, 50.0F, 50.0F, 40.0F, 25.0F, 25.0F, 1.0F },
+  { 0.0F, 0.0F, 1.1F, 0.65F, 0.55F, 0.4F, 0.2F, 0.1F, 0.1F, 0.1F, 0.1F },
 
   // Computed Parameter: uDLookupTable1_bp01Data
   //  Referenced by: '<Root>/1-D Lookup Table1'

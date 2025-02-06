@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'yaw_damper'.
 //
-// Model version                  : 1.1
+// Model version                  : 1.6
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Tue Feb  4 04:53:29 2025
+// C/C++ source code generated on : Wed Feb  5 21:48:25 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M

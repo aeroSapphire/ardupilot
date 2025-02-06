@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'yaw_damper'.
 //
-// Model version                  : 1.1
+// Model version                  : 1.6
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Tue Feb  4 04:53:29 2025
+// C/C++ source code generated on : Wed Feb  5 21:48:25 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -87,18 +87,35 @@ void yaw_damper::step(real32_T arg_yaw_rate_command, real32_T arg_yaw_rate_body,
 
   rtb_Sum1 = arg_yaw_rate_command - arg_yaw_rate_body;
 
-  // Outport: '<Root>/rudder_deflection' incorporates:
+  // Gain: '<S1>/Gain' incorporates:
   //   DiscreteIntegrator: '<Root>/Discrete-Time Integrator'
-  //   Gain: '<S1>/Gain'
+  //   Gain: '<Root>/Gain'
+  //   Gain: '<Root>/Gain2'
   //   Inport: '<Root>/speed_magnitude'
   //   Lookup_n-D: '<Root>/1-D Lookup Table'
   //   Product: '<Root>/Product1'
   //   Sum: '<Root>/Sum'
 
-  arg_rudder_deflection = (yaw_damper_DW.DiscreteTimeIntegrator_DSTATE -
-    rtb_Sum1 * look1_iflf_binlxpw(arg_speed_magnitude,
-    yaw_damper_P.uDLookupTable_bp01Data, yaw_damper_P.uDLookupTable_tableData,
-    10U)) * yaw_damper_P.Gain_Gain;
+  arg_rudder_deflection = (yaw_damper_P.Gain2_Gain * look1_iflf_binlxpw
+    (arg_speed_magnitude, yaw_damper_P.uDLookupTable_bp01Data,
+     yaw_damper_P.uDLookupTable_tableData, 10U) * rtb_Sum1 +
+    yaw_damper_DW.DiscreteTimeIntegrator_DSTATE) * yaw_damper_P.Gain_Gain *
+    yaw_damper_P.Gain_Gain_b;
+
+  // Saturate: '<Root>/Saturation'
+  if (arg_rudder_deflection > yaw_damper_P.Saturation_UpperSat) {
+    // Gain: '<S1>/Gain' incorporates:
+    //   Outport: '<Root>/rudder_deflection'
+
+    arg_rudder_deflection = yaw_damper_P.Saturation_UpperSat;
+  } else if (arg_rudder_deflection < yaw_damper_P.Saturation_LowerSat) {
+    // Gain: '<S1>/Gain' incorporates:
+    //   Outport: '<Root>/rudder_deflection'
+
+    arg_rudder_deflection = yaw_damper_P.Saturation_LowerSat;
+  }
+
+  // End of Saturate: '<Root>/Saturation'
 
   // Update for DiscreteIntegrator: '<Root>/Discrete-Time Integrator' incorporates:
   //   Inport: '<Root>/speed_magnitude'

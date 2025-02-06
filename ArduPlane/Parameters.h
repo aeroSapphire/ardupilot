@@ -357,6 +357,28 @@ public:
         k_param_acro_yaw_rate,
         k_param_takeoff_throttle_max_t,
         k_param_autotune_options,
+
+        k_param_kp_nac,
+        k_param_kd_nac,
+        k_param_ki_nac,
+        k_param_kp_lac,
+        k_param_kd_lac,
+        k_param_ki_lac,
+
+        // Pitch Damper Gains
+        k_param_kp_pd,
+        k_param_ki_pd,
+        k_param_kd_pd,
+
+        // Yaw Damper Gains
+        k_param_kp_yd,
+        k_param_ki_yd,
+        k_param_kd_yd,
+
+        // Roll damper Gains
+        k_param_kp_rd,
+        k_param_ki_rd,
+        k_param_kd_rd,
     };
 
     AP_Int16 format_version;

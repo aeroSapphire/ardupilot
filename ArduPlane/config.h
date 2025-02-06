@@ -171,6 +171,59 @@
 #endif
 
 
+#ifndef KP_LAC
+ # define KP_LAC           0.010737f
+#endif
+
+#ifndef KD_LAC
+ # define KD_LAC           0.001f
+#endif
+
+#ifndef KI_LAC
+ # define KI_LAC           0.0f
+#endif
+
+
+////////////// PITCH DAMPER TUNABLE GAINS   ////////////
+#ifndef KP_PD
+ # define KP_PD           0.10f
+#endif
+
+#ifndef KI_PD
+ # define KI_PD           0.3f
+#endif
+
+#ifndef KD_PD
+ # define KD_PD           0.0f
+#endif
+
+////////////// YAW DAMPER TUNABLE GAINS   ////////////
+#ifndef KP_YD
+ # define KP_YD           0.10f
+#endif
+
+#ifndef KI_YD
+ # define KI_YD           0.35f
+#endif
+
+#ifndef KD_YD
+ # define KD_YD           0.0f
+#endif
+
+
+////////////// ROLL DAMPER TUNABLE GAINS   ////////////
+#ifndef KP_RD
+ # define KP_RD           0.02f
+#endif
+
+#ifndef KI_RD
+ # define KI_RD           0.10f
+#endif
+
+#ifndef KD_RD
+ # define KD_RD           0.0f
+#endif
+
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 // DEBUGGING

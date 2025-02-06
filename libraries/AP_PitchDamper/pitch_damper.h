@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'pitch_damper'.
 //
-// Model version                  : 1.1
+// Model version                  : 1.3
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Tue Feb  4 04:46:14 2025
+// C/C++ source code generated on : Wed Feb  5 04:50:17 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -33,51 +33,40 @@ class pitch_damper final
  public:
   // Block states (default storage) for system '<Root>'
   struct DW_pitch_damper_T {
-    real32_T DiscreteTimeIntegrator_DSTATE;// '<Root>/Discrete-Time Integrator'
+    real32_T Integrator_DSTATE;        // '<Root>/Integrator'
   };
 
   // Parameters (default storage)
   struct P_pitch_damper_T {
-    real32_T DiscreteTimeIntegrator_gainval;
-                           // Computed Parameter: DiscreteTimeIntegrator_gainval
-                              //  Referenced by: '<Root>/Discrete-Time Integrator'
+    real32_T Integrator_gainval;       // Computed Parameter: Integrator_gainval
+                                          //  Referenced by: '<Root>/Integrator'
 
-    real32_T DiscreteTimeIntegrator_IC;
-                                // Computed Parameter: DiscreteTimeIntegrator_IC
-                                   //  Referenced by: '<Root>/Discrete-Time Integrator'
+    real32_T Integrator_IC;            // Computed Parameter: Integrator_IC
+                                          //  Referenced by: '<Root>/Integrator'
 
-    real32_T DiscreteTimeIntegrator_UpperSat;
-                          // Computed Parameter: DiscreteTimeIntegrator_UpperSat
-                             //  Referenced by: '<Root>/Discrete-Time Integrator'
+    real32_T Integrator_UpperSat;     // Computed Parameter: Integrator_UpperSat
+                                         //  Referenced by: '<Root>/Integrator'
 
-    real32_T DiscreteTimeIntegrator_LowerSat;
-                          // Computed Parameter: DiscreteTimeIntegrator_LowerSat
-                             //  Referenced by: '<Root>/Discrete-Time Integrator'
+    real32_T Integrator_LowerSat;     // Computed Parameter: Integrator_LowerSat
+                                         //  Referenced by: '<Root>/Integrator'
 
-    real32_T uDLookupTable2_tableData[11];
-                                 // Computed Parameter: uDLookupTable2_tableData
-                                    //  Referenced by: '<Root>/1-D Lookup Table2'
+    real32_T Kp_tableData[11];         // Computed Parameter: Kp_tableData
+                                          //  Referenced by: '<Root>/Kp'
 
-    real32_T uDLookupTable2_bp01Data[11];
-                                  // Computed Parameter: uDLookupTable2_bp01Data
-                                     //  Referenced by: '<Root>/1-D Lookup Table2'
-
-    real32_T Gain1_Gain;               // Computed Parameter: Gain1_Gain
-                                          //  Referenced by: '<Root>/Gain1'
+    real32_T Kp_bp01Data[11];          // Computed Parameter: Kp_bp01Data
+                                          //  Referenced by: '<Root>/Kp'
 
     real32_T Gain_Gain;                // Computed Parameter: Gain_Gain
                                           //  Referenced by: '<Root>/Gain'
 
-    real32_T Gain_Gain_b;              // Computed Parameter: Gain_Gain_b
+    real32_T Gain_Gain_l;              // Computed Parameter: Gain_Gain_l
                                           //  Referenced by: '<S1>/Gain'
 
-    real32_T uDLookupTable3_tableData[11];
-                                 // Computed Parameter: uDLookupTable3_tableData
-                                    //  Referenced by: '<Root>/1-D Lookup Table3'
+    real32_T Ki_tableData[11];         // Computed Parameter: Ki_tableData
+                                          //  Referenced by: '<Root>/Ki'
 
-    real32_T uDLookupTable3_bp01Data[11];
-                                  // Computed Parameter: uDLookupTable3_bp01Data
-                                     //  Referenced by: '<Root>/1-D Lookup Table3'
+    real32_T Ki_bp01Data[11];          // Computed Parameter: Ki_bp01Data
+                                          //  Referenced by: '<Root>/Ki'
 
   };
 
@@ -101,9 +90,6 @@ class pitch_damper final
   // Real-Time Model get method
   pitch_damper::RT_MODEL_pitch_damper_T * getRTM();
 
-  // Block states
-  DW_pitch_damper_T pitch_damper_DW;
-
   // Tunable parameters
   static P_pitch_damper_T pitch_damper_P;
 
@@ -111,8 +97,8 @@ class pitch_damper final
   void initialize();
 
   // model step function
-  void step(real32_T arg_pitch_rate_command, real32_T arg_pitch_rate_body,
-            real32_T arg_speed_magnitude, real32_T &arg_elevator_deflection);
+  void step(real32_T arg_pitch_rate_command, real32_T arg_pitch_rate, real32_T
+            arg_speed_magnitude, real32_T &arg_elevator_deflection);
 
   // model terminate function
   static void terminate();
@@ -125,6 +111,9 @@ class pitch_damper final
 
   // private data and function members
  private:
+  // Block states
+  DW_pitch_damper_T pitch_damper_DW;
+
   // Real-Time Model
   RT_MODEL_pitch_damper_T pitch_damper_M;
 };
