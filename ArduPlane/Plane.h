@@ -356,6 +356,11 @@ private:
         uint32_t AFS_last_valid_rc_ms;
     } failsafe;
 
+    struct {
+        float Az;
+        float Ay;
+        } accel_commands;
+
     enum Landing_ApproachStage {
         RTL,
         LOITER_TO_ALT,
@@ -894,6 +899,7 @@ private:
     float stabilize_pitch_get_pitch_out();
     void stabilize_stick_mixing_fbw();
     void stabilize_yaw();
+    float gain_scaling(float gain, float scaling_factor_upper, float scaling_factor_lower, float speed);
     int16_t calc_nav_yaw_coordinated();
     int16_t calc_nav_yaw_course(void);
     int16_t calc_nav_yaw_ground(void);

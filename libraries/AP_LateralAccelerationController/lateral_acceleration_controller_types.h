@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'lateral_acceleration_controller'.
 //
-// Model version                  : 1.2
+// Model version                  : 1.3
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Tue Feb  4 05:04:46 2025
+// C/C++ source code generated on : Mon Feb  3 04:23:50 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M

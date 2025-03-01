@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'pitch_damper'.
 //
-// Model version                  : 1.3
+// Model version                  : 1.12
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Wed Feb  5 04:50:17 2025
+// C/C++ source code generated on : Mon Feb 17 21:04:45 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M

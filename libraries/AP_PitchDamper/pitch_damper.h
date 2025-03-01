@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'pitch_damper'.
 //
-// Model version                  : 1.3
+// Model version                  : 1.12
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Wed Feb  5 04:50:17 2025
+// C/C++ source code generated on : Mon Feb 17 21:04:45 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -34,10 +34,15 @@ class pitch_damper final
   // Block states (default storage) for system '<Root>'
   struct DW_pitch_damper_T {
     real32_T Integrator_DSTATE;        // '<Root>/Integrator'
+    real32_T UD_DSTATE;                // '<S1>/UD'
   };
 
   // Parameters (default storage)
   struct P_pitch_damper_T {
+    real32_T DiscreteDerivative_ICPrevScaled;
+                              // Mask Parameter: DiscreteDerivative_ICPrevScaled
+                                 //  Referenced by: '<S1>/UD'
+
     real32_T Integrator_gainval;       // Computed Parameter: Integrator_gainval
                                           //  Referenced by: '<Root>/Integrator'
 
@@ -50,23 +55,44 @@ class pitch_damper final
     real32_T Integrator_LowerSat;     // Computed Parameter: Integrator_LowerSat
                                          //  Referenced by: '<Root>/Integrator'
 
-    real32_T Kp_tableData[11];         // Computed Parameter: Kp_tableData
-                                          //  Referenced by: '<Root>/Kp'
+    real32_T uDLookupTable2_tableData[11];
+                                 // Computed Parameter: uDLookupTable2_tableData
+                                    //  Referenced by: '<Root>/1-D Lookup Table2'
 
-    real32_T Kp_bp01Data[11];          // Computed Parameter: Kp_bp01Data
-                                          //  Referenced by: '<Root>/Kp'
+    real32_T uDLookupTable2_bp01Data[11];
+                                  // Computed Parameter: uDLookupTable2_bp01Data
+                                     //  Referenced by: '<Root>/1-D Lookup Table2'
+
+    real32_T uDLookupTable1_tableData[4];
+                                 // Computed Parameter: uDLookupTable1_tableData
+                                    //  Referenced by: '<Root>/1-D Lookup Table1'
+
+    real32_T uDLookupTable1_bp01Data[4];
+                                  // Computed Parameter: uDLookupTable1_bp01Data
+                                     //  Referenced by: '<Root>/1-D Lookup Table1'
+
+    real32_T TSamp_WtEt;               // Computed Parameter: TSamp_WtEt
+                                          //  Referenced by: '<S1>/TSamp'
 
     real32_T Gain_Gain;                // Computed Parameter: Gain_Gain
                                           //  Referenced by: '<Root>/Gain'
 
-    real32_T Gain_Gain_l;              // Computed Parameter: Gain_Gain_l
-                                          //  Referenced by: '<S1>/Gain'
+    real32_T Gain_Gain_b;              // Computed Parameter: Gain_Gain_b
+                                          //  Referenced by: '<S2>/Gain'
 
-    real32_T Ki_tableData[11];         // Computed Parameter: Ki_tableData
-                                          //  Referenced by: '<Root>/Ki'
+    real32_T Saturation_UpperSat;     // Computed Parameter: Saturation_UpperSat
+                                         //  Referenced by: '<Root>/Saturation'
 
-    real32_T Ki_bp01Data[11];          // Computed Parameter: Ki_bp01Data
-                                          //  Referenced by: '<Root>/Ki'
+    real32_T Saturation_LowerSat;     // Computed Parameter: Saturation_LowerSat
+                                         //  Referenced by: '<Root>/Saturation'
+
+    real32_T uDLookupTable3_tableData[11];
+                                 // Computed Parameter: uDLookupTable3_tableData
+                                    //  Referenced by: '<Root>/1-D Lookup Table3'
+
+    real32_T uDLookupTable3_bp01Data[11];
+                                  // Computed Parameter: uDLookupTable3_bp01Data
+                                     //  Referenced by: '<Root>/1-D Lookup Table3'
 
   };
 
@@ -97,8 +123,8 @@ class pitch_damper final
   void initialize();
 
   // model step function
-  void step(real32_T arg_pitch_rate_command, real32_T arg_pitch_rate, real32_T
-            arg_speed_magnitude, real32_T &arg_elevator_deflection);
+  void step(real32_T arg_pitch_rate_command, real32_T arg_pitch_rate_body,
+            real32_T arg_speed_magnitude, real32_T &arg_elevator_deflection);
 
   // model terminate function
   static void terminate();
@@ -119,6 +145,12 @@ class pitch_damper final
 };
 
 //-
+//  These blocks were eliminated from the model due to optimizations:
+//
+//  Block '<S1>/Data Type Duplicate' : Unused code path elimination
+
+
+//-
 //  The generated code includes comments that allow you to trace directly
 //  back to the appropriate location in the model.  The basic format
 //  is <system>/block_name, where system is the system number (uniquely
@@ -133,7 +165,8 @@ class pitch_damper final
 //  Here is the system hierarchy for this model
 //
 //  '<Root>' : 'pitch_damper'
-//  '<S1>'   : 'pitch_damper/Radians to Degrees'
+//  '<S1>'   : 'pitch_damper/Discrete Derivative'
+//  '<S2>'   : 'pitch_damper/Radians to Degrees'
 
 #endif                                 // RTW_HEADER_pitch_damper_h_
 

@@ -1328,6 +1328,19 @@ void GCS_MAVLINK_Plane::handle_message(const mavlink_message_t &msg)
         break;
     }
 
+    case MAVLINK_MSG_ID_COMMANDED_ACCEL:
+    {
+        gcs().send_text(MAV_SEVERITY_INFO, "MSG ID: %i",
+                        msg.msgid);
+        mavlink_commanded_accel_t packet;
+        mavlink_msg_commanded_accel_decode(&msg, &packet);
+
+        // Store commands in a global structure
+        plane.accel_commands.Az = packet.Az_cmd;
+        plane.accel_commands.Ay = packet.Ay_cmd;
+        break;
+    }
+
     case MAVLINK_MSG_ID_SET_POSITION_TARGET_LOCAL_NED:
     {
         // decode packet

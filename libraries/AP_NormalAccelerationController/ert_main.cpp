@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'normal_acceleration_controller'.
 //
-// Model version                  : 1.5
+// Model version                  : 1.7
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Tue Feb  4 05:42:14 2025
+// C/C++ source code generated on : Tue Feb 11 00:32:08 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M

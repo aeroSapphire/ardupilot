@@ -43,6 +43,15 @@ struct AP_FixedWing {
     AP_Float ki_rd;
     AP_Float kd_rd;
 
+    AP_Float scl_lwr_pd;
+    AP_Float scl_upr_pd;
+
+    AP_Float scl_lwr_rd;
+    AP_Float scl_upr_rd;
+
+    AP_Float scl_lwr_yd;
+    AP_Float scl_upr_yd;
+
     struct Rangefinder_State {
         bool in_range:1;
         bool have_initial_reading:1;

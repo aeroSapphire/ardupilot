@@ -538,7 +538,61 @@ const AP_Param::Info Plane::var_info[] = {
     // @Increment: 10
     // @User: Standard
     ASCALAR(pitch_limit_min,     "PTCH_LIM_MIN_DEG",  PITCH_MIN),
+    
 
+    // @Param: SCL_LWR_PD
+    // @DisplayName: Scaling gain for Pitch Damper.  
+    // @Description: It scales the gain tuned at cruise speed (PTCH_DMPR_P) for AIRSPEED_MIN.
+    // @Units: None 
+    // @Range: 1 100
+    // @Increment: 0.1
+    // @User: Standard
+    ASCALAR(scl_lwr_pd,     "SCL_LWR_PD",  SCL_LWR_PD),
+
+    // @Param: SCL_LWR_PD
+    // @DisplayName: Scaling gain for Pitch Damper.  
+    // @Description: It scales the gain tuned at cruise speed (PTCH_DMPR_P) for AIRSPEED_MAX.
+    // @Units: None 
+    // @Range: 0 0.99
+    // @Increment: 0.001
+    // @User: Standard
+    ASCALAR(scl_upr_pd,     "SCL_UPR_PD",  SCL_UPR_PD),
+
+    // @Param: SCL_LWR_YD
+    // @DisplayName: Scaling gain for Yaw Damper.  
+    // @Description: It scales the gain tuned at cruise speed (YAW_DMPR_P) for AIRSPEED_MIN.
+    // @Units: None 
+    // @Range: 1 100
+    // @Increment: 0.1
+    // @User: Standard
+    ASCALAR(scl_lwr_yd,     "SCL_LWR_YD",  SCL_LWR_YD),
+
+    // @Param: SCL_UPR_YD
+    // @DisplayName: Scaling gain for Yaw Damper.  
+    // @Description: It scales the gain tuned at cruise speed (YAW_DMPR_P) for AIRSPEED_MAX.
+    // @Units: None 
+    // @Range: 0 0.99
+    // @Increment: 0.001
+    // @User: Standard
+    ASCALAR(scl_upr_yd,     "SCL_UPR_YD",  SCL_UPR_YD),
+
+    // @Param: SCL_LWR_RD
+    // @DisplayName: Scaling gain for Roll Damper.  
+    // @Description: It scales the gain tuned at cruise speed (RLL_DMPR_P) for AIRSPEED_MIN.
+    // @Units: None 
+    // @Range: 1 100
+    // @Increment: 0.1
+    // @User: Standard
+    ASCALAR(scl_lwr_rd,     "SCL_LWR_RD",  SCL_LWR_RD),
+
+    // @Param: SCL_UPR_RD
+    // @DisplayName: Scaling gain for Roll Damper.  
+    // @Description: It scales the gain tuned at cruise speed (RLL_DMPR_P) for AIRSPEED_MAX.
+    // @Units: None 
+    // @Range: 0 0.99
+    // @Increment: 0.001
+    // @User: Standard
+    ASCALAR(scl_upr_rd,     "SCL_UPR_RD",  SCL_UPR_RD),
     // @Param: INTRCPT_KP_NAC
     // @DisplayName: Kp Gain Normal Acceleration Controller
     // @Description: Proportional Gain for Normal Acceleration Controller (INTRCPT Mode), Should be negative.

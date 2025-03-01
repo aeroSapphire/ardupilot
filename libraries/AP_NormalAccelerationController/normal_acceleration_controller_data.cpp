@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'normal_acceleration_controller'.
 //
-// Model version                  : 1.5
+// Model version                  : 1.7
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Tue Feb  4 05:42:14 2025
+// C/C++ source code generated on : Tue Feb 11 00:32:08 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -30,12 +30,12 @@ normal_acceleration_controller::P_normal_acceleration_control_T
   // Computed Parameter: DiscreteTimeIntegrator_UpperSat
   //  Referenced by: '<Root>/Discrete-Time Integrator'
 
-  0.122173049F,
+  0.0872664601F,
 
   // Computed Parameter: DiscreteTimeIntegrator_LowerSat
   //  Referenced by: '<Root>/Discrete-Time Integrator'
 
-  -0.122173049F,
+  -0.0872664601F,
 
   // Computed Parameter: Saturation_UpperSat
   //  Referenced by: '<Root>/Saturation'

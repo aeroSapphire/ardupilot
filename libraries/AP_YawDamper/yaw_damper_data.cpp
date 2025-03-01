@@ -39,7 +39,7 @@ yaw_damper::P_yaw_damper_T yaw_damper::yaw_damper_P{
   // Computed Parameter: uDLookupTable_tableData
   //  Referenced by: '<Root>/1-D Lookup Table'
 
-  { 15.0F, 14.0F, 12.0F, 7.0F, 6.0F, 4.0F, 2.0F, 0.4F, 0.375F, 0.4F, 0.4F },
+  { 0.07F, 0.15F, 0.23F, 0.25F, 0.25F, 0.23F, 0.15F, 0.1F, 0.03F, 0.01F, 0.0025F },
 
   // Computed Parameter: uDLookupTable_bp01Data
   //  Referenced by: '<Root>/1-D Lookup Table'
@@ -75,7 +75,7 @@ yaw_damper::P_yaw_damper_T yaw_damper::yaw_damper_P{
   // Computed Parameter: uDLookupTable1_tableData
   //  Referenced by: '<Root>/1-D Lookup Table1'
 
-  { 0.0F, 0.0F, 1.1F, 0.65F, 0.55F, 0.4F, 0.2F, 0.1F, 0.1F, 0.1F, 0.1F },
+  { 0.0F, 0.1F, 0.1F, 0.25F, 0.30F, 0.20F, 0.10F, 0.08F, 0.05F, 0.02F, 0.0F },
 
   // Computed Parameter: uDLookupTable1_bp01Data
   //  Referenced by: '<Root>/1-D Lookup Table1'

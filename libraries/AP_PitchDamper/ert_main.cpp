@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'pitch_damper'.
 //
-// Model version                  : 1.3
+// Model version                  : 1.12
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Wed Feb  5 04:50:17 2025
+// C/C++ source code generated on : Mon Feb 17 21:04:45 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -20,8 +20,8 @@ static pitch_damper pitch_damper_Obj;  // Instance of model class
 // '<Root>/pitch_rate_command'
 static real32_T arg_pitch_rate_command{ 0.0F };
 
-// '<Root>/pitch_rate'
-static real32_T arg_pitch_rate{ 0.0F };
+// '<Root>/pitch_rate_body'
+static real32_T arg_pitch_rate_body{ 0.0F };
 
 // '<Root>/speed_magnitude'
 static real32_T arg_speed_magnitude{ 0.0F };
@@ -60,7 +60,7 @@ void rt_OneStep(void)
   // Set model inputs here
 
   // Step the model
-  pitch_damper_Obj.step(arg_pitch_rate_command, arg_pitch_rate,
+  pitch_damper_Obj.step(arg_pitch_rate_command, arg_pitch_rate_body,
                         arg_speed_magnitude, arg_elevator_deflection);
 
   // Get model outputs here

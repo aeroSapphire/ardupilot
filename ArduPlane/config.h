@@ -112,7 +112,7 @@
 // AIRSPEED_CRUISE
 //
 #ifndef AIRSPEED_CRUISE
- # define AIRSPEED_CRUISE                12 // 12 m/s
+ # define AIRSPEED_CRUISE                170 // 12 m/s
 #endif
 
 
@@ -129,10 +129,10 @@
 // FLY_BY_WIRE_B airspeed control
 //
 #ifndef AIRSPEED_FBW_MIN
- # define AIRSPEED_FBW_MIN               9
+ # define AIRSPEED_FBW_MIN               50
 #endif
 #ifndef AIRSPEED_FBW_MAX
- # define AIRSPEED_FBW_MAX               22
+ # define AIRSPEED_FBW_MAX               400
 #endif
 
 #ifndef CRUISE_ALT_FLOOR
@@ -170,7 +170,45 @@
  # define RUDDER_MIX           0.5f
 #endif
 
+#ifndef SCL_LWR_PD
+ # define SCL_LWR_PD           0.03f
+#endif
 
+#ifndef SCL_UPR_PD
+ # define SCL_UPR_PD           0.03f
+#endif
+
+#ifndef SCL_LWR_RD
+ # define SCL_LWR_RD           0.03f
+#endif
+
+#ifndef SCL_UPR_RD
+ # define SCL_UPR_RD           0.03f
+#endif
+
+#ifndef SCL_LWR_YD
+ # define SCL_LWR_YD           0.03f
+#endif
+
+#ifndef SCL_UPR_YD
+ # define SCL_UPR_YD           0.03f
+#endif
+
+//////// NORMAL ACCELERATION CONTROLLER TUNABLE ////////
+#ifndef KP_NAC
+ # define KP_NAC           -0.07f
+#endif
+
+#ifndef KI_NAC
+ # define KI_NAC           -0.03f
+#endif
+
+#ifndef KD_NAC
+ # define KD_NAC           0.0f
+#endif
+
+
+//////// LATERAL ACCELERATION CONTROLLER TUNABLE ////////
 #ifndef KP_LAC
  # define KP_LAC           0.010737f
 #endif
@@ -186,11 +224,11 @@
 
 ////////////// PITCH DAMPER TUNABLE GAINS   ////////////
 #ifndef KP_PD
- # define KP_PD           0.10f
+ # define KP_PD           0.60f
 #endif
 
 #ifndef KI_PD
- # define KI_PD           0.3f
+ # define KI_PD           4.0f
 #endif
 
 #ifndef KD_PD
@@ -199,11 +237,11 @@
 
 ////////////// YAW DAMPER TUNABLE GAINS   ////////////
 #ifndef KP_YD
- # define KP_YD           0.10f
+ # define KP_YD           0.6f
 #endif
 
 #ifndef KI_YD
- # define KI_YD           0.35f
+ # define KI_YD           4.0f
 #endif
 
 #ifndef KD_YD
@@ -257,7 +295,7 @@
 //
 
 #ifndef SCALING_SPEED
- # define SCALING_SPEED          15.0
+ # define SCALING_SPEED          180.0
 #endif
 
 // a digital pin to set high when the geo-fence triggers. Defaults

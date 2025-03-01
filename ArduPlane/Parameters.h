@@ -379,6 +379,15 @@ public:
         k_param_kp_rd,
         k_param_ki_rd,
         k_param_kd_rd,
+
+        k_param_scl_lwr_pd,
+        k_param_scl_upr_pd,
+
+        k_param_scl_lwr_rd,
+        k_param_scl_upr_rd,
+
+        k_param_scl_lwr_yd,
+        k_param_scl_upr_yd,
     };
 
     AP_Int16 format_version;

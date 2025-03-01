@@ -146,6 +146,9 @@ class Board:
                 'AP_YawDamper',
                 'AP_NormalAccelerationController',
                 'AP_LateralAccelerationController',
+                'AP_PitchDamper_Tunable',
+                'AP_RollDamper_Tunable',
+                'AP_YawDamper_Tunable'
             ]
             cfg.msg("Enabled custom controller", 'yes')
         else:

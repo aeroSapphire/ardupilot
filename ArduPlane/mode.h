@@ -10,8 +10,11 @@
 #include <AP_AHRS/AP_AHRS.h>
 #include <AP_Mission/AP_Mission.h>
 #include <AP_PitchDamper/pitch_damper.h>
+#include <AP_PitchDamper_Tunable/pitch_damper_tunable.h>
 #include <AP_YawDamper/yaw_damper.h>
+#include <AP_YawDamper_Tunable/yaw_damper_tunable.h>
 #include <AP_RollDamper/roll_damper.h>
+#include <AP_RollDamper_Tunable/roll_damper_tunable.h>
 #include <AP_NormalAccelerationController/normal_acceleration_controller.h>
 #include <AP_LateralAccelerationController/lateral_acceleration_controller.h>
 #include <AP_GuidanceLaw/guidance_law.h>
@@ -473,9 +476,9 @@ private:
     roll_damper rollDamper;
     // roll_hold rollHold;
 
-    // pitch_damper_tunable pitchDamperTunable;
-    // yaw_damper_tunable yawDamperTunable;
-    // roll_damper_tunable rollDamperTunable;
+    pitch_damper_tunable pitchDamperTunable;
+    yaw_damper_tunable yawDamperTunable;
+    roll_damper_tunable rollDamperTunable;
 
     guidance_law guidance;
     normal_acceleration_controller normalAccController;

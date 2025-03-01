@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'pitch_damper'.
 //
-// Model version                  : 1.3
+// Model version                  : 1.12
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Wed Feb  5 04:50:17 2025
+// C/C++ source code generated on : Mon Feb 17 21:04:45 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -75,35 +75,79 @@ real32_T look1_iflf_binlxpw_pd(real32_T u0, const real32_T bp0[], const real32_T
 }
 
 // Model step function
-void pitch_damper::step(real32_T arg_pitch_rate_command, real32_T arg_pitch_rate,
-  real32_T arg_speed_magnitude, real32_T &arg_elevator_deflection)
+void pitch_damper::step(real32_T arg_pitch_rate_command, real32_T
+  arg_pitch_rate_body, real32_T arg_speed_magnitude, real32_T
+  &arg_elevator_deflection)
 {
-  // Outport: '<Root>/elevator_deflection' incorporates:
+  real32_T rtb_Sum1;
+  real32_T rtb_TSamp;
+
+  // Sum: '<Root>/Sum1' incorporates:
+  //   Inport: '<Root>/pitch_rate_body'
+  //   Inport: '<Root>/pitch_rate_command'
+
+  rtb_Sum1 = arg_pitch_rate_command - arg_pitch_rate_body;
+
+  // SampleTimeMath: '<S1>/TSamp' incorporates:
+  //   Inport: '<Root>/speed_magnitude'
+  //   Lookup_n-D: '<Root>/1-D Lookup Table1'
+  //   Product: '<Root>/Product3'
+  //
+  //  About '<S1>/TSamp':
+  //   y = u * K where K = 1 / ( w * Ts )
+
+  rtb_TSamp = rtb_Sum1 * look1_iflf_binlxpw_pd(arg_speed_magnitude,
+    pitch_damper_P.uDLookupTable1_bp01Data,
+    pitch_damper_P.uDLookupTable1_tableData, 3U) * pitch_damper_P.TSamp_WtEt;
+
+  // Gain: '<S2>/Gain' incorporates:
   //   DiscreteIntegrator: '<Root>/Integrator'
   //   Gain: '<Root>/Gain'
-  //   Gain: '<S1>/Gain'
-  //   Inport: '<Root>/pitch_rate'
   //   Inport: '<Root>/speed_magnitude'
-  //   Lookup_n-D: '<Root>/Kp'
+  //   Lookup_n-D: '<Root>/1-D Lookup Table2'
   //   Product: '<Root>/Product1'
   //   Sum: '<Root>/Sum'
+  //   Sum: '<S1>/Diff'
+  //   UnitDelay: '<S1>/UD'
+  //
+  //  Block description for '<S1>/Diff':
+  //
+  //   Add in CPU
+  //
+  //  Block description for '<S1>/UD':
+  //
+  //   Store in Global RAM
 
-  arg_elevator_deflection = (pitch_damper_DW.Integrator_DSTATE - arg_pitch_rate *
-    look1_iflf_binlxpw_pd(arg_speed_magnitude, pitch_damper_P.Kp_bp01Data,
-                       pitch_damper_P.Kp_tableData, 10U)) *
-    pitch_damper_P.Gain_Gain * pitch_damper_P.Gain_Gain_l;
+  arg_elevator_deflection = ((rtb_Sum1 * look1_iflf_binlxpw_pd(arg_speed_magnitude,
+    pitch_damper_P.uDLookupTable2_bp01Data,
+    pitch_damper_P.uDLookupTable2_tableData, 10U) +
+    pitch_damper_DW.Integrator_DSTATE) + (rtb_TSamp - pitch_damper_DW.UD_DSTATE))
+    * pitch_damper_P.Gain_Gain * pitch_damper_P.Gain_Gain_b;
+
+  // Saturate: '<Root>/Saturation'
+  if (arg_elevator_deflection > pitch_damper_P.Saturation_UpperSat) {
+    // Gain: '<S2>/Gain' incorporates:
+    //   Outport: '<Root>/elevator_deflection'
+
+    arg_elevator_deflection = pitch_damper_P.Saturation_UpperSat;
+  } else if (arg_elevator_deflection < pitch_damper_P.Saturation_LowerSat) {
+    // Gain: '<S2>/Gain' incorporates:
+    //   Outport: '<Root>/elevator_deflection'
+
+    arg_elevator_deflection = pitch_damper_P.Saturation_LowerSat;
+  }
+
+  // End of Saturate: '<Root>/Saturation'
 
   // Update for DiscreteIntegrator: '<Root>/Integrator' incorporates:
-  //   Inport: '<Root>/pitch_rate'
-  //   Inport: '<Root>/pitch_rate_command'
   //   Inport: '<Root>/speed_magnitude'
-  //   Lookup_n-D: '<Root>/Ki'
+  //   Lookup_n-D: '<Root>/1-D Lookup Table3'
   //   Product: '<Root>/Product2'
-  //   Sum: '<Root>/Sum1'
 
-  pitch_damper_DW.Integrator_DSTATE += (arg_pitch_rate_command - arg_pitch_rate)
-    * look1_iflf_binlxpw_pd(arg_speed_magnitude, pitch_damper_P.Ki_bp01Data,
-    pitch_damper_P.Ki_tableData, 10U) * pitch_damper_P.Integrator_gainval;
+  pitch_damper_DW.Integrator_DSTATE += look1_iflf_binlxpw_pd(arg_speed_magnitude,
+    pitch_damper_P.uDLookupTable3_bp01Data,
+    pitch_damper_P.uDLookupTable3_tableData, 10U) * rtb_Sum1 *
+    pitch_damper_P.Integrator_gainval;
   if (pitch_damper_DW.Integrator_DSTATE >= pitch_damper_P.Integrator_UpperSat) {
     pitch_damper_DW.Integrator_DSTATE = pitch_damper_P.Integrator_UpperSat;
   } else if (pitch_damper_DW.Integrator_DSTATE <=
@@ -112,6 +156,14 @@ void pitch_damper::step(real32_T arg_pitch_rate_command, real32_T arg_pitch_rate
   }
 
   // End of Update for DiscreteIntegrator: '<Root>/Integrator'
+
+  // Update for UnitDelay: '<S1>/UD'
+  //
+  //  Block description for '<S1>/UD':
+  //
+  //   Store in Global RAM
+
+  pitch_damper_DW.UD_DSTATE = rtb_TSamp;
 }
 
 // Model initialize function
@@ -119,6 +171,14 @@ void pitch_damper::initialize()
 {
   // InitializeConditions for DiscreteIntegrator: '<Root>/Integrator'
   pitch_damper_DW.Integrator_DSTATE = pitch_damper_P.Integrator_IC;
+
+  // InitializeConditions for UnitDelay: '<S1>/UD'
+  //
+  //  Block description for '<S1>/UD':
+  //
+  //   Store in Global RAM
+
+  pitch_damper_DW.UD_DSTATE = pitch_damper_P.DiscreteDerivative_ICPrevScaled;
 }
 
 // Model terminate function

@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'lateral_acceleration_controller'.
 //
-// Model version                  : 1.2
+// Model version                  : 1.3
 // Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
-// C/C++ source code generated on : Tue Feb  4 05:04:46 2025
+// C/C++ source code generated on : Mon Feb  3 04:23:50 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -17,17 +17,23 @@
 
 static lateral_acceleration_controller lateral_acceleration_contro_Obj;// Instance of model class 
 
+// '<Root>/Ay_body'
+static real32_T arg_Ay_body{ 0.0F };
+
 // '<Root>/Ay_cmd'
 static real32_T arg_Ay_cmd{ 0.0F };
 
-// '<Root>/Axyz_body'
-static real32_T arg_Axyz_body[3]{ 0.0F, 0.0F, 0.0F };
-
-// '<Root>/yaw_rate_body'
-static real32_T arg_yaw_rate_body{ 0.0F };
+// '<Root>/yaw_rate'
+static real32_T arg_yaw_rate{ 0.0F };
 
 // '<Root>/yaw_rate_command'
 static real32_T arg_yaw_rate_command;
+
+static real32_T Kp_lateral_acc;
+
+static real32_T Ki_lateral_acc;
+
+static real32_T Kd_lateral_acc;
 
 //
 // Associating rt_OneStep with a real-time clock or interrupt service routine
@@ -60,8 +66,8 @@ void rt_OneStep(void)
   // Set model inputs here
 
   // Step the model
-  lateral_acceleration_contro_Obj.step(arg_Ay_cmd, arg_Axyz_body,
-    arg_yaw_rate_body, arg_yaw_rate_command);
+  lateral_acceleration_contro_Obj.step(arg_Ay_body, arg_Ay_cmd, arg_yaw_rate,
+    arg_yaw_rate_command, Kp_lateral_acc, Ki_lateral_acc, Kd_lateral_acc);
 
   // Get model outputs here
 

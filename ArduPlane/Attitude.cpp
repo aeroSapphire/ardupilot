@@ -5,6 +5,31 @@
   to PIDs to change the scaling of the PID with speed. At high speed
   we move the surfaces less, and at low speeds we move them more.
  */
+
+float Plane::gain_scaling(float gain, float scaling_factor_upper, float scaling_factor_lower, float speed)
+{
+    float speed_cruise = plane.aparm.airspeed_cruise;
+    float speed_max = plane.aparm.airspeed_max;
+    float speed_min = plane.aparm.airspeed_min;
+    float gain_max_speed = gain*scaling_factor_upper;
+    float gain_min_speed = gain*scaling_factor_lower;
+    float slope_upper = (gain_max_speed-gain)/(speed_max-speed_cruise);
+    float slope_lower = (gain-gain_min_speed)/(speed_cruise-speed_min);
+
+    float current_airspeed = speed;
+    float scaled_gain;
+    if (current_airspeed < speed_cruise) {
+        scaled_gain = slope_lower * (speed_cruise - current_airspeed) + gain;
+    } 
+    else if (current_airspeed > speed_cruise) {
+        scaled_gain = slope_upper * (current_airspeed - speed_cruise) + gain;  // Notice slope_upper here
+    } else {
+        scaled_gain = gain;
+    }
+
+    return scaled_gain;
+}
+
 float Plane::calc_speed_scaler(void)
 {
     float aspeed, speed_scaler;
